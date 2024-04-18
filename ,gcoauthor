@@ -1,0 +1,8 @@
+#!/bin/bash
+
+account=$1
+data=$(curl -s https://api.github.com/users/$account)
+id=$(echo $data | jq .id)
+name=$(echo $data | jq --raw-output '.name // .login')
+
+printf "Co-authored-by: %s <%d+%s@users.noreply.github.com>\n" "$name" $id $account
