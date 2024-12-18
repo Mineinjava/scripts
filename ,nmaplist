@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+tab=$'\t'
+pIF=$(echo "show State:/Network/Global/IPv4" | scutil | awk -F: '/PrimaryInterface/{sub(/ /,"",$2); print $2}')
+sn=$(ipconfig getifaddr $pIF | sed -En 's/^([0-9]+\.[0-9]+\.[0-9]+).*/\1/p')
+for i in {1..254}; do nmap -F $sn.$i 2>/dev/null; done

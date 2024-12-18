@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Function to display help message
+print_help() {  
+    echo "Usage: $0 <destination_file>"
+    echo "Pastes the contents of the clipboard into the destination file."
+}
+
+# Check if an argument (destination file) is provided
+if [ -z "$1" ]; then
+    print_help
+    exit 1 
+fi
+
+
+# destination file
+destination_file="$1"  
+
+# Paste the clipboard content into the destination file
+pbpaste > "$destination_file" 
+echo "File contents pasted from clipboard."
+
